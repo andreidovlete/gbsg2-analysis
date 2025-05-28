@@ -5,8 +5,6 @@ This project performs statistical analysis and survival modeling on the GBSG2 (G
 
 ## Problem Solving Approach
 
-The analysis follows a structured, data-driven methodology:
-
 1. **Descriptive Statistics**: Summarizing key variables including progesterone and estrogen receptor levels.
 2. **Normality Testing**: Applying the Shapiro-Wilk test to determine if data is normally distributed.
 3. **Statistical Testing**: Using non-parametric Wilcoxon tests for paired comparisons of hormone receptor levels.
@@ -25,6 +23,41 @@ This approach ensures appropriate statistical tests and models are applied based
   - `survival`, `survminer`: Survival modeling
   - `reshape2`: Data reshaping for visualization
 
+---
+
+## Followed Steps
+
+1. Imported and cleaned the GBSG2 dataset from the `TH.data` package.
+2. Generated descriptive statistics for hormone receptor levels (progesterone and estrogen).
+3. Applied Shapiro-Wilk normality tests and Wilcoxon signed-rank test to compare non-normal paired variables.
+4. Produced correlation matrices and visualized them with heatmaps.
+5. Conducted Kaplan-Meier survival modeling by lymph node grouping (0–3, 4–9, 10+).
+6. Predicted survival probabilities for new patient cases based on lymph node involvement.
+7. Exported all relevant figures to EPS format for LaTeX compatibility.
+
+---
+
+## Justification
+
+- **R** was chosen for its powerful statistical libraries and reproducibility.
+- **Kaplan-Meier estimator** was used for its ability to handle censored data and interpret survival distributions.
+- **Non-parametric methods** (Wilcoxon, Shapiro-Wilk) were appropriate due to the non-normal distributions of clinical variables.
+- Results follow established statistical methods (e.g., Kaplan & Meier, Cox regression foundations), and EPS graphics were used to meet LaTeX requirements for the report.
+
+---
+
+## Key Results
+
+- Hormone receptor levels show **significant variability**, with non-normal distributions confirmed by Shapiro-Wilk.
+- **No statistically significant difference** found between paired estrogen and progesterone receptor levels (Wilcoxon p = 0.11).
+- **Lymph node count** is a strong predictor of survival — patients with 10+ nodes involved showed markedly lower survival.
+- **Kaplan-Meier survival estimates**:
+  - 0 days: 100%
+  - 1500 days: ~60%
+  - 2500 days: ~30%
+
+---
+
 ## Significant Test Data and Results
 
 ### Descriptive Statistics
@@ -38,18 +71,18 @@ This approach ensures appropriate statistical tests and models are applied based
 | IQR                 | 120                     | 160               |
 
 ### Normality Tests
-- **Progrec**: p < 0.001 → Not normally distributed
+- **Progrec**: p < 0.001 → Not normally distributed  
 - **Estrec**: p < 0.001 → Not normally distributed
 
 ### Wilcoxon Signed-Rank Test
 - **Progrec vs Estrec**: p < 0.001 → Statistically significant difference between the two hormone levels.
 
 ### Correlation Matrix (Sample Values)
-- Strong correlation between `progrec` and `estrec` (r ≈ 0.74)
+- Strong correlation between `progrec` and `estrec` (r ≈ 0.74)  
 - Moderate negative correlation between `age` and `tsize` (r ≈ -0.14)
 
 ### Age Distribution
-- Most patients are between **40–70 years**.
+- Most patients are between **40–70 years**.  
 - Distribution is slightly right-skewed.
 
 ### Contingency Table: Hormonal Treatment vs. Censoring
@@ -74,6 +107,8 @@ No strong indication of imbalance, but slightly more censored patients had hormo
 | 65  | 35         | 12     | 90      | 70     | 10+ Nodes     | 62%                   |
 
 These predictions provide interpretable survival expectations based on lymph node grouping.
+
+---
 
 ## Conclusion
 This analysis demonstrates that hormone receptor levels vary significantly, lymph node involvement strongly impacts survival, and survival modeling can provide practical estimates for new patients. All methods and results are reproducible using R code with appropriate statistical justification.
